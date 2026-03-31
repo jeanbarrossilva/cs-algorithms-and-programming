@@ -45,7 +45,7 @@ where Self: BidirectionalCollection, Self: MutableCollection {
         let b = self[j]
         if areInOrder(a, b) {
           continue
-        } else if wasAlreadySorted && i == indices.last && j == J.first {
+        } else if wasAlreadySorted && i == indices.first && j == J.last {
           // We have iterated over the entire collection exactly one time, and
           // no element was swapped. This means that the collection is already
           // sorted; we can skip the other n² - 1 iterations and return early.
