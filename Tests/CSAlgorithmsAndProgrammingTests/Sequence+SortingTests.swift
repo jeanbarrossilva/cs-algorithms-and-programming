@@ -20,8 +20,8 @@
 @testable import CSAlgorithmsAndProgramming
 import Testing
 
-@Suite("MutableCollection+Sorting tests")
-struct MutableCollectionSortingTests {
+@Suite("Sequence+Sorting tests")
+struct SequenceSortingTests {
   @Test
   func bubbleSorts() {
     var collection = [4, 5, 2, 8, 9, 3, 6, 7, 1]
