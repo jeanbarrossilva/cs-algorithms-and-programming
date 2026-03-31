@@ -1,7 +1,7 @@
 // ===-----------------------------------------------------------------------===
 // Copyright © 2026 Jean Silva
 //
-// This file is part of the CSAlgorithmsAndProgramming open-source project.
+// This file is part of the CSAlgorithmsAndProgrammingLogic open-source project.
 //
 // This program is free software: you can redistribute it and/or modify it under
 // the terms of the GNU General Public License as published by the Free Software
@@ -17,5 +17,15 @@
 // this program. If not, see https://www.gnu.org/licenses.
 // ===-----------------------------------------------------------------------===
 
-@main
-struct CSAlgorithmsAndProgramming { static func main() throws {} }
+@testable import CSAlgorithmsAndProgrammingLogic
+import Testing
+
+@Suite("Sequence+Sorting tests")
+struct SequenceSortingTests {
+  @Test
+  func bubbleSorts() {
+    var A = Array(stride(from: 8, through: 1, by: -1))
+    A.bubbleSort(by: <)
+    #expect(A.elementsEqual(1..<9))
+  }
+}

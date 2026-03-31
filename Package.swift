@@ -3,12 +3,12 @@
 import PackageDescription
 
 let package = Package(
-  name: "CSAlgorithmsAndProgramming",
+  name: "CSAlgorithmsAndProgrammingLogic",
   targets: [
-    .executableTarget(name: "CSAlgorithmsAndProgramming"),
+    .executableTarget(name: "CSAlgorithmsAndProgrammingLogic"),
     .testTarget(
-      name: "CSAlgorithmsAndProgrammingTests",
-      dependencies: [.target(name: "CSAlgorithmsAndProgramming")]
+      name: "CSAlgorithmsAndProgrammingLogicLogicTests",
+      dependencies: [.target(name: "CSAlgorithmsAndProgrammingLogic")]
     )
   ],
   swiftLanguageModes: [.v6]

@@ -1,7 +1,7 @@
 // ===-----------------------------------------------------------------------===
 // Copyright © 2026 Jean Silva
 //
-// This file is part of the CSAlgorithmsAndProgramming open-source project.
+// This file is part of the CSAlgorithmsAndProgrammingLogic open-source project.
 //
 // This program is free software: you can redistribute it and/or modify it under
 // the terms of the GNU General Public License as published by the Free Software

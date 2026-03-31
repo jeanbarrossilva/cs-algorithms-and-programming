@@ -1,8 +1,8 @@
-#  CS: Algorithms and Programming
+#  CS: Algorithms and Programming Logic
 
 Solutions of some exercises proposed by professors lecturing Algorithms and
-Programming in the Computer Science course given by Instituto Brasileiro de
-Medicina e Reabilitação (Brazilian Institute of Medicine and Rehabilitation,
+Programming Logic in the Computer Science course given by Instituto Brasileiro
+de Medicina e Reabilitação (Brazilian Institute of Medicine and Rehabilitation,
 IBMR) from 2026 to 2030.
 
 Note that the code contained in this repository is in Swift, mostly. Exercises
