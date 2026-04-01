@@ -23,7 +23,7 @@ import Testing
 struct SortingTests {
   @Test
   func bubbleSorts() {
-    var A = Array(stride(from: 8, through: 1, by: -1))
+    var A = [Int](stride(from: 8, through: 1, by: -1))
     A.bubbleSort(by: <)
     #expect(A.elementsEqual(1..<9))
   }

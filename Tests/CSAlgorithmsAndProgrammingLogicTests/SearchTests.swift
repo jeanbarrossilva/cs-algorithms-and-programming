@@ -23,7 +23,7 @@ import Testing
 struct SearchTests {
   @Test
   func binarySearches() {
-    let A = [Int](count: 64) { index in (index + 1) * 2 }
+    let A = [Int](count: 64) { i in (i + 1) * 2 }
     #expect(A.binarySearch(forIndexOf: 0) == nil)
     #expect(A.binarySearch(forIndexOf: 2) == A.startIndex)
   }

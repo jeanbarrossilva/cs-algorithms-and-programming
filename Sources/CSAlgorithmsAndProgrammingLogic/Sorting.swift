@@ -18,7 +18,7 @@
 // ===-----------------------------------------------------------------------===
 
 extension Sequence
-where Self: BidirectionalCollection, Self: MutableCollection {
+where Self: MutableCollection, Indices: BidirectionalCollection {
   /// Sorts this collection using the bubble sort algorithm.
   ///
   /// Bubble sort is one of the simplest algorithms for sorting elements of a
@@ -37,23 +37,24 @@ where Self: BidirectionalCollection, Self: MutableCollection {
   ///   sorted. This closure returning `false` indicates to the algorithm that
   ///   both elements should be swapped.
   mutating func bubbleSort(by areInOrder: (Element, Element) -> Bool) {
-    for i in indices[..<indices.index(before: indices.endIndex)] {
-      var didSwap = false
-      for j in indices[indices.index(after: i)...] {
-        let a = self[i]
-        let b = self[j]
-        if areInOrder(a, b) { continue }
-        self[i] = b
-        self[j] = a
-        didSwap = true
+    var didSwapInLastIteration = false
+    let indexOfSecondIndex = indices.index(after: indices.startIndex)
+    var indexOfSortingEndIndex = indices.index(before: indices.endIndex)
+    repeat {
+      for startingIndex in indices[..<indexOfSortingEndIndex] {
+        let adjacentIndex = index(after: startingIndex)
+        let startingElement = self[startingIndex]
+        let adjacentElement = self[adjacentIndex]
+        if areInOrder(startingElement, adjacentElement) {
+          didSwapInLastIteration = false
+          continue
+        }
+        self[startingIndex] = adjacentElement
+        self[adjacentIndex] = startingElement
+        didSwapInLastIteration = true
       }
-      if didSwap { continue }
-
-      // Given J as the set of indices jₘ and 0 ≤ m < n - 1, we have performed p
-      // iterations and no element was swapped, where p = (i + 1) × |J|. This
-      // means that the collection is already sorted; we can skip the other
-      // n² - p iterations.
-      break
-    }
+      guard indexOfSortingEndIndex > indexOfSecondIndex else { break }
+      indexOfSortingEndIndex = indices.index(before: indexOfSortingEndIndex)
+    } while didSwapInLastIteration
   }
 }
