@@ -36,13 +36,11 @@ extension BidirectionalCollection where Element: Comparable {
   ///   in this collection.
   func binarySearch(forIndexOf element: Element) -> Index? {
     if isEmpty { return nil }
-    let m = index(startIndex, offsetBy: count / 2)
-    if element > self[m] {
-      return self[index(after: m)...].binarySearch(forIndexOf: element)
-    } else if element == self[m] {
-      return m
-    } else {
-      return self[...index(before: m)].binarySearch(forIndexOf: element)
+    let index = index(startIndex, offsetBy: count / 2)
+    return if element > self[index] {
+      self[self.index(after: index)...].binarySearch(forIndexOf: element)
+    } else if element == self[index] { index } else {
+      self[...self.index(before: index)].binarySearch(forIndexOf: element)
     }
   }
 }
