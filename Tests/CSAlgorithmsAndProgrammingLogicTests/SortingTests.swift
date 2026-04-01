@@ -21,10 +21,20 @@
 import Testing
 
 struct SortingTests {
+  let A = [Int](stride(from: 8, through: 1, by: -1))
+  let E = 1..<9
+
   @Test
   func bubbleSorts() {
-    var A = [Int](stride(from: 8, through: 1, by: -1))
-    A.bubbleSort(by: <)
-    #expect(A.elementsEqual(1..<9))
+    var B = A
+    B.bubbleSort(by: <)
+    #expect(B.elementsEqual(E))
+  }
+
+  @Test
+  func selectionSorts() {
+    var B = A
+    B.selectionSort(by: <)
+    #expect(B.elementsEqual(E))
   }
 }
