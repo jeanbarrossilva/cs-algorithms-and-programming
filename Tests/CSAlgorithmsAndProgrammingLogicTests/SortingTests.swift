@@ -32,6 +32,13 @@ struct SortingTests {
   }
 
   @Test
+  func insertionSorts() {
+    var B = A
+    B.insertionSort()
+    #expect(B.elementsEqual(E))
+  }
+
+  @Test
   func selectionSorts() {
     var B = A
     B.selectionSort()

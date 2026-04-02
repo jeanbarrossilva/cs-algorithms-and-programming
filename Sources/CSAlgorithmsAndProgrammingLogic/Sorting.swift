@@ -19,7 +19,7 @@
 
 extension Sequence
 where
-  Self: MutableCollection, Element: Comparable, Indices: BidirectionalCollection
+  Self: BidirectionalCollection, Self: MutableCollection, Element: Comparable
 {
   /// Sorts this collection using the bubble sort algorithm.
   ///
@@ -41,10 +41,10 @@ where
   mutating func bubbleSort() {
     guard count > 1 else { return }
     var didSwapInLastIteration = false
-    let indexOfSecondIndex = indices.index(after: indices.startIndex)
-    var indexOfSortingEndIndex = indices.index(before: indices.endIndex)
+    let secondIndex = index(after: indices.startIndex)
+    var sortingEndIndex = index(before: indices.endIndex)
     repeat {
-      for startingIndex in indices[..<indexOfSortingEndIndex] {
+      for startingIndex in indices[..<sortingEndIndex] {
         let adjacentIndex = index(after: startingIndex)
         let startingElement = self[startingIndex]
         let adjacentElement = self[adjacentIndex]
@@ -56,9 +56,43 @@ where
         self[adjacentIndex] = startingElement
         didSwapInLastIteration = true
       }
-      guard indexOfSortingEndIndex > indexOfSecondIndex else { break }
-      indexOfSortingEndIndex = indices.index(before: indexOfSortingEndIndex)
+      guard sortingEndIndex > secondIndex else { break }
+      sortingEndIndex = index(before: sortingEndIndex)
     } while didSwapInLastIteration
+  }
+
+  /// Sorts this collection using the insertion sort algorithm.
+  ///
+  /// Insertion sort works as follows:
+  ///
+  /// 1. The element at *i*, where *i* starts off by being the second index of
+  ///    this collection containing *n* elements, is considered to be the "key"
+  ///    element.
+  /// 2. The key is compared to each of its predecessors at *j*, where
+  ///    0 ≤ *j* < *i*.
+  /// 3. Once the lower predecessor which is greater than the key is
+  ///    encountered, such element and those succeeding it are offset by one
+  ///    index.
+  /// 4. The key element is placed at the index at which that lower predecessor
+  ///    was before being offset.
+  /// 5. *i* is incremented.
+  ///
+  /// This process is repeated until *i* becomes the last index of this
+  /// collection.
+  ///
+  /// - Complexity: O(*n*²).
+  mutating func insertionSort() {
+    guard count > 1 else { return }
+    for keyIndex in indices[index(after: startIndex)...] {
+      let key = self[keyIndex]
+      var predecessorIndex = index(before: keyIndex)
+      var predecessor: Element { self[predecessorIndex] }
+      while predecessorIndex >= startIndex && key < predecessor {
+        self[index(after: predecessorIndex)] = predecessor
+        predecessorIndex = index(before: predecessorIndex)
+      }
+      self[index(after: predecessorIndex)] = key
+    }
   }
 
   /// Sorts this collection using the selection sort algorithm.
@@ -70,13 +104,14 @@ where
   ///
   /// This is similar to ``bubbleSort(by:)``.
   ///
-  /// - Complexity: O(*n*²).
+  /// - Complexity: O(*n*²), where *n* is the amount of elements in
+  ///   collection.
   mutating func selectionSort() {
     guard count > 1 else { return }
     var didSwapInLastIteration = false
     repeat {
-      for startingIndex in indices[..<indices.index(before: endIndex)] {
-        for successorIndex in indices[indices.index(after: startingIndex)...] {
+      for startingIndex in indices[..<index(before: endIndex)] {
+        for successorIndex in indices[index(after: startingIndex)...] {
           let startingElement = self[startingIndex]
           let successorElement = self[successorIndex]
           guard startingElement > successorElement else {
